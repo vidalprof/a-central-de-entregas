@@ -96,7 +96,7 @@ h1{font-size:34px;font-weight:700;color:#fff;margin:6px 0 2px;text-align:center;
    ⚠️ ela SUBSTITUI a barra fina: dois indicadores de progresso na mesma tela
    e ruido, e a altura util no PC da escola e de ~640px. */
 .vitrine{position:absolute;top:calc(8px + env(safe-area-inset-top));left:12px;right:12px;
-  height:44px;z-index:3;border-radius:14px;padding:4px 8px;
+  height:52px;z-index:3;border-radius:14px;padding:4px 8px;
   background:rgba(255,253,246,.42);
   -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
   border:2px solid rgba(255,255,255,.7);border-bottom:5px solid rgba(215,171,99,.8);
@@ -108,7 +108,13 @@ h1{font-size:34px;font-weight:700;color:#fff;margin:6px 0 2px;text-align:center;
   display:-webkit-box;display:-webkit-flex;display:flex;
   -webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;
   min-width:0}
-.vitrine .vg img{max-width:100%;max-height:32px;object-fit:contain;
+/* ⚠️ DENTRO DE UM FLEX, `max-width:100%` NAO SEGURA NADA (medido, ago/2026).
+   A miniatura e um item flex, e item flex ENCOLHE por padrao (`flex-shrink:1`):
+   numa vaga de 26px a figura saia com 11px — o portao do encaixe acusou
+   "PEQUENA DEMAIS" dezenas de vezes e eu procurei o defeito na largura da
+   vaga, que estava certa. Quem manda a figura NAO encolher e o `flex:none`. */
+.vitrine .vg img{-webkit-box-flex:0;-webkit-flex:none;flex:none;
+  max-width:100%;max-height:40px;object-fit:contain;
   opacity:0;-webkit-transform:scale(.4) translateY(8px);transform:scale(.4) translateY(8px);
   -webkit-transition:opacity .45s,-webkit-transform .45s cubic-bezier(.2,1.5,.4,1);
   transition:opacity .45s,transform .45s cubic-bezier(.2,1.5,.4,1)}
@@ -763,13 +769,13 @@ h1{font-size:34px;font-weight:700;color:#fff;margin:6px 0 2px;text-align:center;
 
 .mec-autoexplicacao .esc{display:inline-block;vertical-align:top;width:31.3%;max-width:150px;margin:0 1% 8px; padding:7px 4px 6px;font-size:13px;line-height:1.2;min-height:82px}
 
-.mec-autoexplicacao .esc svg{display:block;width:44px;height:44px;margin:0 auto 4px}
+.mec-autoexplicacao .esc svg, .mec-autoexplicacao .esc img{display:block;width:44px;height:44px;object-fit:contain;margin:0 auto 4px}
 
 .mec-autoexplicacao .opts .opt{min-height:62px}
 
 .mec-autoexplicacao .cardfig{display:inline-block;vertical-align:middle;width:46px;height:46px;margin-right:9px}
 
-.mec-autoexplicacao .cardfig svg{display:block;width:100%;height:100%}
+.mec-autoexplicacao .cardfig svg, .mec-autoexplicacao .cardfig img{display:block;width:100%;height:100%;object-fit:contain}
 
 .mec-autoexplicacao .cardtxt{display:inline-block;vertical-align:middle;text-align:left; width:-webkit-calc(100% - 60px);width:calc(100% - 60px); font-size:15px;font-weight:600;line-height:1.25}
 
@@ -787,7 +793,7 @@ h1{font-size:34px;font-weight:700;color:#fff;margin:6px 0 2px;text-align:center;
 
 .mec-autoexplicacao .esc{min-height:72px;padding:5px 3px}
 
-.mec-autoexplicacao .esc svg{width:34px;height:34px}
+.mec-autoexplicacao .esc svg, .mec-autoexplicacao .esc img{width:34px;height:34px}
 
 .mec-autoexplicacao .opts .opt{min-height:52px;margin:6px auto;font-size:15px}
 
@@ -1239,7 +1245,7 @@ h1{font-size:34px;font-weight:700;color:#fff;margin:6px 0 2px;text-align:center;
 
 .mec-escrever-legenda .el_campo:focus{border-color:#3c6ee0}
 
-.mec-escrever-legenda .contador{margin-top:4px;font-size:14px;font-weight:700;opacity:.9}
+.mec-escrever-legenda .contador{margin-top:4px;font-size:14px;font-weight:700;opacity:.95;color:#fffdf6;background:rgba(46,38,26,.86);border-radius:999px;padding:3px 12px;display:inline-block}
 
 .mec-escrever-legenda .linhabt{margin-top:8px}
 
@@ -1761,7 +1767,7 @@ h1{font-size:34px;font-weight:700;color:#fff;margin:6px 0 2px;text-align:center;
 
 .mec-raios-x .rxvidro:after{content:"";position:absolute;left:12%;top:10%;width:36%;height:22%; border-radius:50%;background:rgba(255,255,255,.22)}
 
-.mec-raios-x .rxdica{display:block;text-align:center;font-size:12.5px;font-weight:700; color:var(--texto,#fffdf6);margin-top:8px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.mec-raios-x .rxdica{display:inline-block;text-align:center;font-size:12.5px;font-weight:700; color:#fffdf6;margin-top:8px;background:rgba(46,38,26,.86); border-radius:999px;padding:4px 14px}
 
 .mec-raios-x .rxprop{display:block;width:100%;padding-bottom:74%;pointer-events:none}
 
@@ -1903,7 +1909,7 @@ body{background:#1d2330}
    ⚠️ A chave do localStorage E CRITICA: no GitHub Pages TODAS as atividades
    moram na MESMA origem (vidalprof.github.io). Duas atividades com a chave
    "jardim_med" apagariam o progresso uma da outra na mesma tarde. */
-var ID = {"pre": "ce", "mascote": "mascote", "mascoteNome": "Vera", "titulo": "A Central de Entregas", "sub": "Língua Portuguesa · 6º ano · conhecer os gêneros textuais", "fundo": "ce_fundo.jpg", "crachas": 6, "convite": "<b>Quem entra no turno</b> hoje?", "narrar": "manual"};
+var ID = {"pre": "ce", "mascote": "mascote", "mascoteNome": "Vera", "titulo": "A Central de Entregas", "sub": "Língua Portuguesa · 6º ano · conhecer os gêneros textuais", "fundo": "ce_fundo.png", "crachas": 6, "convite": "<b>Quem entra no turno</b> hoje?", "narrar": "manual"};
 
 "use strict";
 /* ============ IMAGENS ============ */
@@ -2264,7 +2270,10 @@ function poeVitrine(t, feitas){
      `feitas` a crianca via so as vagas VAZIAS a frente e a vitrine parecia
      nunca encher (medido: 14 vagas, 0 doces, na fase 7). Assim ela ve os
      ultimos ~10 que ja conquistou e uns poucos que faltam. */
-  if(fim>14){ ini=Math.max(0, Math.min(feitas-10, fim-14)); fim=ini+14; }
+  /* ⚠️ 14 vagas em 388px davam 26px de figura — do tamanho de um icone, e a
+     crianca nao reconhece o que juntou. Com 10, a peca sobe para ~37px e a
+     prateleira continua contando a mesma historia. */
+  if(fim>10){ ini=Math.max(0, Math.min(feitas-7, fim-10)); fim=ini+10; }
   for(i=ini;i<fim;i++){
     var g=el("div","vg"+(i<feitas?" posto":""));
     g.appendChild(imgEl(VITRINE[i]));
@@ -2331,7 +2340,12 @@ vz.addEventListener("error",paraZap);
 var _ultVoz={k:null,t:0};
 function tocaVoz(k,bt){
   /* ⚠️ a chave tem que ser o ARQUIVO, nao o argumento: o `falar` recebe
-     "op_qlqbul" e o `tocaVoz` recebe "qlqbul" — o mesmo mp3 com dois nomes.
+     "op_<conta>" e o `tocaVoz` recebe so a "<conta>" — o mesmo mp3 com dois
+     nomes. (⚠️ o exemplo aqui era uma chave DE VERDADE, copiada de uma
+     atividade; como ela viaja no motor para todas as outras, o portao do
+     resto-de-clone a encontrava e acusava marca de atividade alheia num
+     arquivo limpo. Comentario tambem e texto — exemplo em comentario se
+     escreve com marcador, nunca com um identificador real.)
      Comparar os argumentos crus fazia o guarda achar que eram vozes
      diferentes, e as duas partiam juntas do mesmo jeito. */
   var _ag=(new Date()).getTime(), _kk="op_"+k;
