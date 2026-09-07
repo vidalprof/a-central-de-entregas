@@ -5,6 +5,7 @@
   "prefixo": "ce",
   "mascote": "mascote",
   "mascoteNome": "Vera",
+  "mascote_vetor": {"vb":[452,728],"olhos":[[171,159,18,11],[257,151,18,11]],"palpebra":"#a8684c","cilio":"#3a2416","boca":"M196 212 Q227 246 257 208 Q227 216 196 212 Z","bocaCor":"#4a1d0a","bocaBorda":"#c38571","bocaBordaLarg":3},
   "crachas": 6,
   "fundo": "ce_fundo.png",
   "convite": "<b>Quem entra no turno</b> hoje?",
@@ -869,6 +870,7 @@
         }
       ],
       "dadosExtra": {
+        "ENUN": "Três textos sobre a mesma obra. Veja quem escreveu e para quê.",
         "DICAS": [
           "Não pergunte quem tem razão: pergunte de ONDE cada um fala.",
           "Olhe a etiqueta de cada texto: quem escreveu e para quê.",
@@ -1082,6 +1084,7 @@
       "mec": "memoria",
       "selo": "O ARQUIVO DA VERA",
       "enunciado": "Vire as fichas e case cada gênero com a marca que entrega ele.",
+      "dadosExtra": {"ENUN": "Vire as fichas e case cada gênero com a marca que entrega ele."},
       "dica": "Não procure fichas iguais: procure a que COMBINA.",
       "conceito": "objetivo5",
       "dados": [
@@ -1664,6 +1667,7 @@
       "mec": "memoria",
       "selo": "O ARQUIVO DA MADRUGADA",
       "enunciado": "Segunda gaveta: agora o par é gênero e missão.",
+      "dadosExtra": {"ENUN": "Segunda gaveta: agora o par é gênero e missão."},
       "dica": "Pergunte o que cada texto veio fazer.",
       "conceito": "objetivo2",
       "dados": [
